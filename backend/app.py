@@ -18,7 +18,7 @@ def analyze():
 
     response = image_analysis(image)
     print(response, file=sys.stdout)
-    return jsonify({'data': response})
+    return jsonify({'feedback': response})
 
 @app.route('/test', methods=['POST'])
 def test():
