@@ -27,6 +27,17 @@ const App = ({ addOnUISdk, sandboxProxy }: { addOnUISdk: AddOnSDKAPI; sandboxPro
 		console.log("img", await blobToBase64(response[0].blob));
 	}
 
+	async function getFeedback(base64Image: string) {
+		const form = new FormData();
+		form.append('image', base64Image)
+		const response = await fetch("https://localhost:5436", {
+			method: "POST",
+			body: form
+		});
+		const data = await response.json();
+		return data['feedback'];
+	}
+
 	return (
 		<div className="flex flex-col w-full h-full">
 			{/* <Button size="m" onClick={handleClick}>
