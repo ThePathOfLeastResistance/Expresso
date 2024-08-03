@@ -1,6 +1,6 @@
 {
-    "testId": "export-sample",
-    "name": "Export Sample",
+    "testId": "ae48f862-7bb1-4790-9acd-a277e113f6b3",
+    "name": "Project",
     "version": "1.0.0",
     "manifestVersion": 2,
     "requirements": {
@@ -10,16 +10,13 @@
                 "apiVersion": 1
             }
         ]
-    
     },
     "entryPoints": [
         {
             "type": "panel",
             "id": "panel1",
             "main": "index.html",
-            "permissions": {
-                "sandbox": ["allow-popups", "allow-presentation", "allow-downloads"]
-            }
+            "documentSandbox": "code.js"
         }
     ]
 }

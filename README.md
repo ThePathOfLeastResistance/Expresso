@@ -1,13 +1,13 @@
 ## About
 
-This project has been created with _@adobe/create-ccweb-add-on_. 
-This add-on demonstrates how to use the Export APIs to export content in various formats including jpeg, png, pdf and mp4.
+This project has been created with _@adobe/create-ccweb-add-on_. As an example, this Add-on demonstrates how to get started with Add-on development using React and TypeScript with Document Sandbox Runtime.
 
 ## Tools
 
 -   HTML
 -   CSS
--   JavaScript
+-   React
+-   TypeScript
 
 ## Setup
 
