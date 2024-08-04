@@ -17,8 +17,8 @@ ASSETS_DIR = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/analyze', methods=['POST'])
-def analyze():
+@app.route('/feedback', methods=['POST'])
+def feedback():
     image = request.form.get('image', None)
     if not image:
         return jsonify({'error': 'image null'})
@@ -35,7 +35,7 @@ def saliency():
 
     if not image:
         return jsonify({'error': 'image null'})
-    
+
     # Decode image string from base64
     decoded_bytes = base64.b64decode(image.lstrip('data:image/jpeg;base64'))
     # img = Image.open(io.BytesIO(decoded_bytes)).convert('RGB')

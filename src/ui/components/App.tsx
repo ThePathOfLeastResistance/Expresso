@@ -32,7 +32,7 @@ const App = ({ addOnUISdk, sandboxProxy }: { addOnUISdk: AddOnSDKAPI; sandboxPro
 	async function getFeedback(base64Image: string) {
 		const form = new FormData();
 		form.append('image', base64Image)
-		const response = await fetch("https://localhost:5436/saliency", {
+		const response = await fetch("https://localhost:5436/feedback", {
 			method: "POST",
 			body: form
 		});
