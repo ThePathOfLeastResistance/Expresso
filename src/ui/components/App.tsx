@@ -5,6 +5,8 @@ import "./output.css";
 
 import { AddOnSDKAPI } from "https://new.express.adobe.com/static/add-on-sdk/sdk.js";
 
+import { base64_image } from "./temp";
+
 function blobToBase64(blob: Blob) {
 	return new Promise((resolve, _) => {
 		const reader = new FileReader();
@@ -30,7 +32,7 @@ const App = ({ addOnUISdk, sandboxProxy }: { addOnUISdk: AddOnSDKAPI; sandboxPro
 	async function getFeedback(base64Image: string) {
 		const form = new FormData();
 		form.append('image', base64Image)
-		const response = await fetch("https://localhost:5436", {
+		const response = await fetch("https://localhost:5436/saliency", {
 			method: "POST",
 			body: form
 		});
@@ -46,7 +48,9 @@ const App = ({ addOnUISdk, sandboxProxy }: { addOnUISdk: AddOnSDKAPI; sandboxPro
 			{/* <button className="rounded-full bg-blue-400 mx-4 py-1" onClick={handleGen}>Generate</button>
             <button className="h-12 w-12 border border-red-500">t</button> */}
 			<div className="flex items-center justify-between border-b px-4 py-3">
-				<h3 className="text-lg font-medium">Run Procedure</h3>
+				<h3 className="text-lg font-medium" onClick={async () => {
+					console.log(await getFeedback(base64_image));
+				}}>Run Procedure</h3>
 				<button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-1 ring-slate-300 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-gray-100/90 h-10 px-3">
 					Run
 				</button>

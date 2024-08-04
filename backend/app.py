@@ -7,7 +7,7 @@ import base64
 import sys
 import torch
 from saliency import generate_maps, setup_model
-from typing import Literal, Any
+from typing import Literal
 
 import os
 
@@ -30,23 +30,29 @@ def analyze():
 @app.route('/saliency', methods=['POST'])
 def saliency():
     image = request.form.get('image', None)
-    condition = request.form.get('condition', None)
-    condition: Any = int(condition) if condition else 1
+    condition: Literal[1, 2, 3, 4] = int(request.form.get('condition', 1))  # type: ignore
+    # condition = int(condition) if condition else 1
 
     if not image:
         return jsonify({'error': 'image null'})
     
     # Decode image string from base64
-    decoded_bytes = base64.b64decode(image)
+    decoded_bytes = base64.b64decode(image.lstrip('data:image/jpeg;base64'))
+    # img = Image.open(io.BytesIO(decoded_bytes)).convert('RGB')
+    
     img = Image.open(io.BytesIO(decoded_bytes)).convert('RGB')
-
     _heatmap_img, overlay_img = generate_maps(img, condition, model, device)
     # Encode image to base64 JPEG
     _, buffer = cv2.imencode('.jpg', overlay_img)
-    encoded_image = base64.b64encode(buffer.tobytes()).decode('utf-8')
+    buffer_bytes = buffer.tobytes()
+    encoded_image = base64.b64encode(buffer_bytes).decode('utf-8')
     # TODO: Fix this garbage
 
     print(encoded_image, file=sys.stdout)
+    import pathlib
+    with open(pathlib.Path(__file__).parent / 'test.jpg', 'wb') as f:
+        f.write(buffer_bytes)
+
     return jsonify({'image': encoded_image})
 
 @app.route('/test', methods=['POST'])
@@ -54,11 +60,13 @@ def test():
     return jsonify({'data': 'ok'})
 
 if __name__ == '__main__':
-    context = ('server.crt', 'server.key') #certificate and key files
     # app.run(debug=True, ssl_context=context
-    app.run('localhost', 5436, ssl_context=context)
-
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     model = setup_model(device)
 
+    context = ('server.crt', 'server.key') #certificate and key files
+    app.run('localhost', 5436, ssl_context=context)
+
+
 # Method 2: https://kracekumar.com/post/54437887454/ssl-for-flask-local-development/
+# This is needed to run the app (creating server.crt/key)
