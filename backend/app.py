@@ -65,7 +65,9 @@ def saliency():
     image = request.form.get('image', None)
     condition: Literal[1, 2, 3, 4] = int(request.form.get('condition', 1))  # type: ignore
     # condition = int(condition) if condition else 1
-
+    print(image, file=sys.stdout)
+    print(condition, file=sys.stdout)
+    
     if not image:
         return jsonify({'error': 'image null'})
 
@@ -87,13 +89,14 @@ def saliency():
     _, buffer = cv2.imencode('.jpg', overlay_img)
     buffer_bytes = buffer.tobytes()
     encoded_image = base64.b64encode(buffer_bytes).decode('utf-8')
+    data_url = f'data:image/jpeg;base64,{encoded_image}'
 
-    print(encoded_image, file=sys.stdout)
-    import pathlib
-    with open(pathlib.Path(__file__).parent / 'test.jpg', 'wb') as f:
-        f.write(buffer_bytes)
+    print(data_url, file=sys.stdout)
+    # import pathlib
+    # with open(pathlib.Path(__file__).parent / 'test.jpg', 'wb') as f:
+    #     f.write(buffer_bytes) # TODO: WTF A
 
-    return jsonify({'image': encoded_image})
+    return jsonify({'image': data_url})
 
 @app.route('/test', methods=['POST'])
 def test():
