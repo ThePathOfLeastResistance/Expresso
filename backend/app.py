@@ -9,6 +9,8 @@ import torch
 from saliency import generate_maps, setup_model
 from typing import Literal
 
+from mail import run
+
 import os
 
 from util import image_analysis
@@ -23,11 +25,42 @@ def feedback():
     if not image:
         return jsonify({'error': 'image null'})
 
-    response = image_analysis(image)
+    response = image_analysis(image, 'feedback')
     print(response, file=sys.stdout)
-    return jsonify({'feedback': response})
+    return jsonify({'data': response})
 
-@app.route('/saliency', methods=['POST'])
+@app.route('/description', methods=['POST'])
+def description():
+    image = request.form.get('image', None)
+    if not image:
+        return jsonify({'error': 'image null'})
+
+    response = image_analysis(image, 'description')
+    print(response, file=sys.stdout)
+    return jsonify({'data': response})
+
+@app.route('/tags', methods=['POST'])
+def tags():
+    image = request.form.get('image', None)
+    if not image:
+        return jsonify({'error': 'image null'})
+
+    response = image_analysis(image, 'tags')
+    print(response, file=sys.stdout)
+    return jsonify({'data': response})
+
+@app.route('/email', methods=['POST'])
+def email():
+    image = request.form.get('image', None)
+    to = request.form.get('to', None)
+    if not image:
+        return jsonify({'error': 'image null'})
+
+    run(image, to)
+
+    return jsonify({'data': 'OK'})
+
+@app.route('/heatmap', methods=['POST'])
 def saliency():
     image = request.form.get('image', None)
     condition: Literal[1, 2, 3, 4] = int(request.form.get('condition', 1))  # type: ignore
@@ -37,18 +70,18 @@ def saliency():
         return jsonify({'error': 'image null'})
 
     # Decode image string from base64
-    decoded_bytes = base64.b64decode(image.lstrip('data:image/jpeg;base64'))
+    decoded_bytes = base64.b64decode(image.lstrip('data:image/png;base64'))
     # img = Image.open(io.BytesIO(decoded_bytes)).convert('RGB')
     
     img = Image.open(io.BytesIO(decoded_bytes)).convert('RGB')
 
     # === Debug ===
-    img.save('images/response_1234.jpg')
+    # img.save('images/response_1234.jpg')
     # === Debug ===
 
     # TODO: Comment back in
-    # _heatmap_img, overlay_img = generate_maps(img, condition, model, device)
-    overlay_img = cv2.imread('images/response_1234.jpg') # TODO: Remove
+    _heatmap_img, overlay_img = generate_maps(img, condition, model, device)
+    # overlay_img = cv2.imread('images/response_1234.jpg') # TODO: Remove
 
     # Encode image to base64 JPEG
     _, buffer = cv2.imencode('.jpg', overlay_img)

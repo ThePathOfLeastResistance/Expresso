@@ -57,6 +57,23 @@ body {
 	padding: 0;
 }
 
+.hp-style h1,
+.hp-style p {
+	font-family: sans-serif;
+	color: black;
+}
+
+.hp-style h1 {
+    word-wrap: break-word;
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+.hp-style p {
+    word-wrap: break-word;
+	font-size: 0.5rem;
+}
+
 @keyframes shine-pulse {
 	0% {
 		background-position: 0% 0%;

@@ -17,6 +17,9 @@ export interface Actions {
         id: number;
         uniqueId: string;
     }[]): void;
+    actionGroupName(id: string, label: string): void;
+    addActionGroup(act: ActionGroup): void;
+    deleteActionGroup(id: string): void;
 }
 
 export type Store = State & Readonly<Actions>;
@@ -78,18 +81,25 @@ export const useStore = create<Store>()(
                     // console.log("og", state.actionGroups, "new", updatedGroups);
 
                     return { actionGroups: updatedGroups };
-                })
-                // user: null,
-                // login: (user) => set(() => ({ user })),
-                // logout: () => set(() => ({ user: null })),
-                // verify: () => set((state) => ({
-                //     user: state.user === null ? null : {
-                //         ...state.user,
-                //         verified: true
-                //     }
-                // })),
+                }),
+                actionGroupName: (id: string, label: string) => set((state) => {
+                    const groupIndex = state.actionGroups.findIndex(group => group.id === id);
+                    // console.log("found index", groupIndex);
+
+                    if (groupIndex === -1) return {};
+
+                    const updatedGroups = state.actionGroups.map((group, index) =>
+                        index === groupIndex
+                            ? { ...group, label }
+                            : group
+                    );
+
+                    return { actionGroups: updatedGroups };
+                }),
+                addActionGroup: (act) => set((state) => ({ actionGroups: [...state.actionGroups, act] })),
+                deleteActionGroup: (id) => set((state) => ({ actionGroups: [...state.actionGroups.filter((i) => i.id !== id)] })),
             }),
-            { name: 'authStore', storage: dummyStorage },
+{ name: 'authStore', storage: dummyStorage },
         )
     )
 );
