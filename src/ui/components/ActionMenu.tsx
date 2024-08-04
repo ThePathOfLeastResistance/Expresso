@@ -159,15 +159,25 @@ export default function ActionMenu({ addOnSDKApi, sandboxProxy }: { addOnSDKApi:
 										method: "POST",
 										body: form,
 									});
-									const text = (await response.json())["data"];
-									if (text !== "OK") {
+									if (act.id === 3) {
+										const img = (await response.json())["image"];
 										const element = document.getElementById(act.uniqueId) as HTMLDivElement;
 										element.innerHTML = '';
-										const para = document.createElement("div");
-										para.classList.add("bg-slate-100", "hp-style");
-										para.innerHTML = text;
-										// para.innerHTML = `<p class="bg-slate-100 hp-style">${text}</p>`;
-										element.appendChild(para);
+										const cont = document.createElement("img");
+										cont.src = img;
+										cont.classList.add("w-full", "h-auto");
+										element.appendChild(cont);
+									} else {
+										const text = (await response.json())["data"];
+										if (text !== "OK") {
+											const element = document.getElementById(act.uniqueId) as HTMLDivElement;
+											element.innerHTML = '';
+											const para = document.createElement("div");
+											para.classList.add("bg-slate-100", "hp-style");
+											para.innerHTML = text;
+											// para.innerHTML = `<p class="bg-slate-100 hp-style">${text}</p>`;
+											element.appendChild(para);
+										}
 									}
 								} catch {
 									const element = document.getElementById(act.uniqueId) as HTMLDivElement;
