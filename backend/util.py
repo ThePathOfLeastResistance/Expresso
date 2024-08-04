@@ -27,7 +27,7 @@ def image_analysis(base64_image_url: str, option: str):
     if option == 'feedback':
         text = "Provide concise but detailed bullet point feedback about the attached design about: 1.visual hierarchy/composition/layout 2.colour/contrast 3.text/font 4.content relevance/marketability 5.branding and consistency 6.competitive analysis. Only one point 25 words max per topic. Do not use markdown, e.g. ## - instead use html, like <h1> wrapped around. Don't use the exact topics I gave you as titles. Make an extra <br/> between topic sections."
     elif option == 'description':
-        text = "Provide a max 40 word description of the attached design to be put on a social media post to boost its engagement and marketability."
+        text = "Provide a max 40 word description of the attached design to be put on a social media post to boost its engagement and marketability. Don't put tags."
     elif option == 'tags':
         text = "Provide a list of max 10 social media tags that can be captioned with the attached design to help boost its engagement and marketability. Format should be a space separated list of #tag"
     
