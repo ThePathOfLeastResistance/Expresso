@@ -41,12 +41,19 @@ def saliency():
     # img = Image.open(io.BytesIO(decoded_bytes)).convert('RGB')
     
     img = Image.open(io.BytesIO(decoded_bytes)).convert('RGB')
-    _heatmap_img, overlay_img = generate_maps(img, condition, model, device)
+
+    # === Debug ===
+    img.save('images/response_1234.jpg')
+    # === Debug ===
+
+    # TODO: Comment back in
+    # _heatmap_img, overlay_img = generate_maps(img, condition, model, device)
+    overlay_img = cv2.imread('images/response_1234.jpg') # TODO: Remove
+
     # Encode image to base64 JPEG
     _, buffer = cv2.imencode('.jpg', overlay_img)
     buffer_bytes = buffer.tobytes()
     encoded_image = base64.b64encode(buffer_bytes).decode('utf-8')
-    # TODO: Fix this garbage
 
     print(encoded_image, file=sys.stdout)
     import pathlib
