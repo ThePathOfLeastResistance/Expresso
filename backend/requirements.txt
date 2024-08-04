@@ -2,8 +2,11 @@ flask
 flask_cors
 openai
 opencv-python
-torch
 Pillow
+torch
 torchvision
 torchaudio
 matplotlib
+einops
+timm
+scipy
