@@ -102,7 +102,7 @@ export default function ActionMenu({ addOnSDKApi, sandboxProxy }: { addOnSDKApi:
 						} as React.CSSProperties
 					}
 					className={
-						"disabled:opacity-50 disabled:cursor-not-allowed transition-opacity pointer text-sm ring-1 ring-slate-300 shadow-lg font-medium relative w-fit h-fit hover:bg-gray-100/90 px-3 py-1 place-items-center rounded-[--border-radius] bg-white p-3 text-black dark:bg-black dark:text-white"
+						"disabled:opacity-50 disabled:cursor-not-allowed transition-opacity pointer text-sm ring-1 ring-slate-300 shadow-lg font-medium relative w-fit h-fit hover:bg-gray-100/90 px-3 py-1 place-items-center rounded-[--border-radius] bg-white p-3 text-black"
 					}
 					onClick={async () => {
 						const runBtn = document.getElementById("runBtn") as HTMLButtonElement;

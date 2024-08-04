@@ -33,7 +33,7 @@ export default function MainMenu({ addOnSDKApi }: { addOnSDKApi: AddOnSDKAPI }) 
 					<h1 className="text-center peer w-fit ml-auto mr-auto">List of Action Groups</h1>
 					<div
 						role="tooltip"
-						className="absolute inset-0 left-1/2 transform -translate-x-1/2 top-[calc(100%+8px)] w-fit h-fit text-nowrap hidden peer-hover:block peer-hover:opacity-100 z-10 px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 dark:bg-gray-700 before:content-[''] before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:-translate-y-full before:border-8 before:border-[color:transparent_transparent_black_transparent]"
+						className="absolute inset-0 left-1/2 transform -translate-x-1/2 top-[calc(100%+8px)] w-fit h-fit text-nowrap hidden peer-hover:block peer-hover:opacity-100 z-10 px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 before:content-[''] before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:-translate-y-full before:border-8 before:border-[color:transparent_transparent_black_transparent]"
 					>
 						Select an automated action group
 					</div>
