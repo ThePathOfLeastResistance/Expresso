@@ -12,6 +12,8 @@ import { useStore } from "../util/stores";
 import { z } from "zod";
 import { nanoid } from "nanoid";
 
+import { base64_image } from "./temp";
+
 function blobToBase64(blob: Blob) {
 	return new Promise((resolve, _) => {
 		const reader = new FileReader();
@@ -41,6 +43,16 @@ const App = ({ addOnUISdk, sandboxProxy }: { addOnUISdk: AddOnSDKAPI; sandboxPro
 		console.log("img", await blobToBase64(response[0].blob));
 	}
 
+    async function getFeedback(base64Image: string) {
+		const form = new FormData();
+		form.append('image', base64Image)
+		const response = await fetch("https://localhost:5436/feedback", {
+			method: "POST",
+			body: form
+		});
+		const data = await response.json();
+		return data['feedback'];
+	}
 
 	useEffect(() => {
 		// Fetch for the data
