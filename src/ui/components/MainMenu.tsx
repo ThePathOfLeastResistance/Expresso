@@ -4,6 +4,7 @@ import { useStore } from "../util/stores";
 import { items } from "../util/constants";
 import { nanoid } from "nanoid";
 import EditLabel from "./EditLabel";
+import Logo from "./Logo";
 
 export default function MainMenu({ addOnSDKApi }: { addOnSDKApi: AddOnSDKAPI }) {
 	const list = useStore((state) => state.actionGroups);
@@ -22,7 +23,10 @@ export default function MainMenu({ addOnSDKApi }: { addOnSDKApi: AddOnSDKAPI }) 
 	return (
 		<>
 			<div className="flex items-center justify-between border-b px-4 py-3">
-				<h3 className="text-lg font-medium">Expresso Menu</h3>
+                <div className="flex flex-row">
+                    <Logo className="h-6 w-6 mr-2" />
+                    <h3 className="text-lg font-medium">Expresso Menu</h3>
+                </div>
 			</div>
 			<div className="flex flex-col flex-1 overflow-y-auto space-y-4 p-4">
 				<div className="relative">

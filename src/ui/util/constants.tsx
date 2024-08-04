@@ -8,7 +8,7 @@ export const items: Omit<Action, 'uniqueId'>[] = [
 	{ id: 3, title: "Get heatmap", icon: <HeatIcon className="w-5 h-5" /> },
 	{ id: 4, title: "Generate description", icon: <AIIcon className="w-5 h-5" /> },
 	{ id: 5, title: "Generate tags", icon: <LayersIcon className="w-5 h-5" /> },
-	{ id: 6, title: "Sync with Calendar", icon: <CalIcon className="w-5 h-5" /> }
+	// { id: 6, title: "Sync with Calendar", icon: <CalIcon className="w-5 h-5" /> }
 ];
 
 export const isInput: { value: boolean, label: string, placeholder: string }[] = [

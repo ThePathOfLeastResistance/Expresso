@@ -16,6 +16,7 @@ import {
 } from "./Dropdown";
 import DragItem from "./DragItem";
 import { DocumentSandboxApi } from "../../models/DocumentSandboxApi";
+import Logo from "./Logo";
 
 const reorder = (
 	list: {
@@ -89,7 +90,10 @@ export default function ActionMenu({ addOnSDKApi, sandboxProxy }: { addOnSDKApi:
 	return (
 		<>
 			<div className="flex items-center justify-between border-b px-4 py-3">
-				<h3 className="text-lg font-medium">Expresso</h3>
+                <div className="flex flex-row">
+                    <Logo className="h-6 w-6 mr-2" />
+                    <h3 className="text-lg font-medium">Expresso</h3>
+                </div>
 				<button
 					id="runBtn"
 					style={
