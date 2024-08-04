@@ -38,13 +38,12 @@ def saliency():
     
     # Decode image string from base64
     decoded_bytes = base64.b64decode(image)
-    img = Image.open(io.BytesIO(decoded_bytes))
-    orig_size = img.size
+    img = Image.open(io.BytesIO(decoded_bytes)).convert('RGB')
 
-    output_img = generate_maps(img, orig_size, condition, model, device)
+    _heatmap_img, overlay_img = generate_maps(img, condition, model, device)
     # Encode image to base64 JPEG
-    _, buffer = cv2.imencode('.jpg', output_img)
-    encoded_image = base64.b64encode(buffer).decode('utf-8')
+    _, buffer = cv2.imencode('.jpg', overlay_img)
+    encoded_image = base64.b64encode(buffer.tobytes()).decode('utf-8')
     # TODO: Fix this garbage
 
     print(encoded_image, file=sys.stdout)
