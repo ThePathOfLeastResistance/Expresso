@@ -1,7 +1,8 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "lib": ["dom"]
+        "lib": ["dom"],
+        "strictNullChecks": true
     },
-    "include": ["./**/*"]
+    "include": ["./**/*", "util/types.ts", "util/constants.tsx", "util/stores.ts"]
 }
