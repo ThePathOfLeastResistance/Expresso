@@ -1,13 +1,8 @@
-## About
+# Expresso
 
-This project has been created with _@adobe/create-ccweb-add-on_. As an example, this Add-on demonstrates how to get started with Add-on development using React and TypeScript with Document Sandbox Runtime.
+Expresso is an Adobe Express plugin that revolutionizes the process of creating and optimizing social media posts. It won 3rd place at Hack the 6ix 2024.
 
-## Tools
-
--   HTML
--   CSS
--   React
--   TypeScript
+To learn more, check out <https://devpost.com/software/expresso-9inhuw>
 
 ## Setup
 
